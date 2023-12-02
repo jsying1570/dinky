@@ -83,11 +83,12 @@ public class DataBaseServiceImpl extends SuperServiceImpl<DataBaseMapper, DataBa
         if (Asserts.isNull(dataBase)) {
             return false;
         }
+        boolean result;
         if (Asserts.isNull(dataBase.getId())) {
             try {
                 checkHeartBeat(dataBase);
             } finally {
-                return save(dataBase);
+                result =  save(dataBase);
             }
         } else {
             DataBase dataBaseInfo = getById(dataBase.getId());
@@ -103,9 +104,10 @@ public class DataBaseServiceImpl extends SuperServiceImpl<DataBaseMapper, DataBa
             try {
                 checkHeartBeat(dataBase);
             } finally {
-                return updateById(dataBase);
+                result =  updateById(dataBase);
             }
         }
+        return result;
     }
 
     @Override
